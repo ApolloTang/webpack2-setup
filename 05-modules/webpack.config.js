@@ -7,6 +7,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 // These path must be absolute path on running machine
 const absolutePathToSourceFolder = pathResolve('src');
 const absolutePathToBuildFolder = pathResolve('dist');
+const absolutePathToNodeModules = pathResolve('./node_modules');
 
 module.exports = env => {
     console.log('env: ', env);
@@ -15,9 +16,10 @@ module.exports = env => {
     console.log('__dirname: ', __dirname);
     console.log('absolutePathToSourceFolder: ',  absolutePathToSourceFolder );
     console.log('absolutePathToBuildFolder: ', absolutePathToBuildFolder );
+    console.log('absolutePathToNodeModules: ', absolutePathToNodeModules );
     console.log( '----- path info end -----');
 
-    let config = webpackValidator({
+    let config = {
         context: absolutePathToSourceFolder, // context of entrypoint
         entry: {
             // Each key in entry will map to the [name] placeholder in the value of output.filename
@@ -27,6 +29,16 @@ module.exports = env => {
         output: {
             path: absolutePathToBuildFolder,
             filename: 'bundle.[name].js',
+        },
+        resolve: {
+            // http://moduscreate.com/es6-es2015-import-no-relative-path-webpack/
+            // http://stackoverflow.com/questions/27502608/resolving-require-paths-with-webpack
+            // https://gist.github.com/sokra/27b24881210b56bbaff7#resolving-options
+            // https://github.com/webpack/enhanced-resolve
+            modules: [
+                absolutePathToSourceFolder,
+                absolutePathToNodeModules
+            ]
         },
         module: {
             loaders: [
@@ -45,10 +57,11 @@ module.exports = env => {
                 // inject: 'head',
             })
         ]
-    });
+    };
     if (env && env.debug) {
         console.log('webpack.config: ', config)
     }
+    // return webpackValidator(config);
     return config;
 }
 
