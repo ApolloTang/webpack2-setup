@@ -10,7 +10,7 @@
     "build": "echo \"build\" && webpack",
     "prebuild": "echo \"prebuild\" && rimraf dist",
     "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug",
-    "server": "http-server dist -c-1"
+    "server": "http-server dist -c-1 -p 9090"
   },
   "keywords": [],
   "author": "",

@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>URL</key>
-	<string>https://www.google.ca/search?sourceid=chrome-psyapi2&amp;ion=1&amp;espv=2&amp;ie=UTF-8&amp;q=webpack2%20system.import&amp;oq=webpack2%20system.import&amp;aqs=chrome..69i57j0.4718j0j7</string>
+	<string>http://stackoverflow.com/questions/27502608/resolving-require-paths-with-webpack</string>
 </dict>
 </plist>

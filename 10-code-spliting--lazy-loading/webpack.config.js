@@ -3,6 +3,7 @@ const webpackValidator = require('webpack-validator');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 
 // These path must be absolute path on running machine
@@ -69,7 +70,10 @@ module.exports = env => {
                 favicon: './images/favicon.ico'
                 // inject: 'head',
             }),
-            new ExtractTextPlugin('styles.[name].css')
+            new ExtractTextPlugin('styles.[name].css'),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor' // Specify the common bundle's name.
+            })
         ]
     };
     if (env && env.debug) {
