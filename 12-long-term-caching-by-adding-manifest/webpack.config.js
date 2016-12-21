@@ -37,7 +37,7 @@ module.exports = env => {
         },
         output: {
             path: absolutePathToBuildFolder,
-            filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].[chunkhash].js')
+            filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js')
         },
         resolve: {
             // http://moduscreate.com/es6-es2015-import-no-relative-path-webpack/
@@ -74,7 +74,7 @@ module.exports = env => {
                 favicon: './images/favicon.ico'
                 // inject: 'head',
             }),
-            new ExtractTextPlugin( ifProd('styles.[name].[chunkhash].css', 'styles.[name].[chunkhash].css') ),
+            new ExtractTextPlugin( ifProd('styles.[name].[chunkhash].css', 'styles.[name].css') ),
             ifProd(
                 new webpack.optimize.CommonsChunkPlugin({
                     name: [   // Specify the common bundle's name.
