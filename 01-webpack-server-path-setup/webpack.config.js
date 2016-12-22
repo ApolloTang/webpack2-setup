@@ -1,10 +1,12 @@
 const pathResolve = require('path').resolve;
 const webpackValidator = require('webpack-validator');
 
+// These path must be absolute path on running machine
+const absolutePathToSourceFolder = pathResolve('src');
+const absolutePathToBuildFolder = pathResolve('dist');
+
 module.exports = env => {
-    // These path must be absolute path on running machine
-    const absolutePathToSourceFolder = pathResolve('src');
-    const absolutePathToBuildFolder = pathResolve('dist');
+    console.log('env: ', env);
 
     console.log( '----- path info -----');
     console.log('__dirname: ', __dirname);
@@ -20,7 +22,7 @@ module.exports = env => {
         entry: {
             // Each key in entry will map to the [name] placeholder in the value of output.filename
             main: './main.js',
-            vendor: './vendor.js'
+            vendor: './vendor/index.js'
         },
         output: {
             path: absolutePathToBuildFolder,
@@ -28,7 +30,7 @@ module.exports = env => {
             publicPath: '/dist/',  // dev server's output will be served from here. '/' is __dirname
         },
     });
-    if (env.debug) {
+    if (env && env.debug) {
         console.log('webpack.config: ', config)
     }
     return config;

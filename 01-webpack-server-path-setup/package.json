@@ -6,10 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
 
-    "dev": "echo \"dev\" && webpack-dev-server --env.dev",
+    "dev": "echo \"dev\" && webpack-dev-server",
     "predev": "echo \"predev\" && rimraf dist && cpy src\/favicon.ico src\/index.html dist",
 
-    "build": "webpack --env.prod",
     "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug"
   },
   "keywords": [],
