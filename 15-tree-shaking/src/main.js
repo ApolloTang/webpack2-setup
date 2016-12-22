@@ -2,9 +2,6 @@ console.log('log from main');
 
 var style_main = require('./main.css');
 
-import {used, constants} from 'util/helper';
-console.log('helper.constants: ', constants );
-console.log('helper.used: ', used() );
 
 import _ from 'lodash';
 console.log('_.VERSION: ', _.VERSION);
@@ -40,4 +37,9 @@ const m = {...n};
 const testSpread = () => ({...n});
 console.log ('test es7 spread: ', testSpread());
 
-
+// =========================================================
+// 13-tree-shaking
+//
+import {used, constants} from 'util/helper';
+console.log('helper.constants: ', constants );
+console.log('helper.used: ', used() );
