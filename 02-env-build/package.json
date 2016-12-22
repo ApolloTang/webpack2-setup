@@ -9,8 +9,8 @@
     "dev": "echo \"dev\" && webpack-dev-server",
     "predev": "echo \"predev\" && rimraf dist && cpy src\/favicon.ico dist && cpy src\/index.dev.html dist --rename=index.html",
 
-    "build": "webpack",
-    "prebuild": "echo \"predev\" && rimraf dist && cpy src\/favicon.ico dist && cpy src\/index.build.html dist --rename=index.html",
+    "build": "echo \"build\" && webpack",
+    "prebuild": "echo \"prebuild\" && rimraf dist && cpy src\/favicon.ico dist && cpy src\/index.build.html dist --rename=index.html",
 
     "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug",
     "server": "http-server dist -c-1"
