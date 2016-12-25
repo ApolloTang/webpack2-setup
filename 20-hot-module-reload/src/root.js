@@ -1,6 +1,7 @@
 import React, {Component} from  'react';
 
 import style from './root.css';
+import ModuleA from './modules/module-a';
 
 class Root extends Component {
     constructor () {
@@ -18,12 +19,14 @@ class Root extends Component {
     }
 
     render() {
+        const style = require('./root.css')
         const A = this.state.A
         return (
-            <div className={style.main}>
-                <div>This is React component Root</div>
+            <div className={style.root}>
+                <div>This is Root</div>
                 <button onClick={this.handleClick}>click me to lazy load</button>
                 { A ? <A/> : null }
+                <ModuleA />
             </div>
        );
     }
