@@ -1,18 +1,17 @@
-console.log('log from module/twitter-react/index.js');
+console.log('log from module/twitter-icon/index.js');
 
 import style from './index.css';
-import imageSrc from './twitter-react-img_01.png';
+import imageSrc from './twitter-01.png';
 
 import React, {Component} from  'react';
-class TwitterReact extends Component {
+class TwitterIcon extends Component {
     render() {
         return (
             <div className={style['module-style']} >
-                sadfdsafd
                 <img src={imageSrc}></img>
             </div>
        );
     }
 };
 
-export default TwitterReact;
+export default TwitterIcon;

@@ -10,7 +10,7 @@ class Root extends Component {
         super(...arguments);
         this.handleClick = this.handleClick.bind(this);
         this.state = {
-            A: null,
+            TwitterIcon: null,
             ModuleA: null
         };
     }
@@ -36,28 +36,27 @@ class Root extends Component {
     }
 
     handleClick() {
-        console.log('this.state.A: ', this.state.A)
-        if (this.state.A === null) {
+        if (this.state.TwitterIcon === null) {
             if (module.hot) {
-                console.info('✅  HMR Enabled for <A />.');
+                console.info('✅  HMR Enabled for <TwitterIcon />.');
 
-                System.import('./modules/twitter-react').then(
-                    ({ default: TwitterReact }) => { this.setState({A: (<Hot><TwitterReact /></Hot>)}); }
+                System.import('./modules/twitter-icon').then(
+                    ({ default: TwitterIcon }) => { this.setState({TwitterIcon: (<Hot><TwitterIcon /></Hot>)}); }
                 );
 
-                module.hot.accept('./modules/twitter-react', (opts) => {
-                    console.log('🔁 reloading Module A...', opts);
+                module.hot.accept('./modules/twitter-icon', (opts) => {
+                    console.log('🔁 reloading <TwitterIcon />...', opts);
 
-                    System.import('./modules/twitter-react').then(
-                        ({ default: TwitterReact_new }) => {
-                            this.setState( {A: ( <Hot><TwitterReact_new /></Hot>)})
+                    System.import('./modules/twitter-icon').then(
+                        ({ default: TwitterIcon_new }) => {
+                            this.setState( {TwitterIcon: ( <Hot><TwitterIcon_new /></Hot>)})
                         },
-                        err => { console.info('❌  HMR error (<TwitterReact_new />): ', err); }
+                        err => { console.info('❌  HMR error (<TwitterIcon_new />): ', err); }
                     );
                 });
             } else {
-                System.import('./modules/twitter-react').then(
-                    ({ default: TwitterReact }) => { this.setState({A: (<TwitterReact />)}); }
+                System.import('./modules/twitter-icon').then(
+                    ({ default: TwitterIcon }) => { this.setState({TwitterIcon: (<TwitterIcon />)}); }
                 );
             }
         };
@@ -69,7 +68,7 @@ class Root extends Component {
             <div className={style.root}>
                 <div>This is Root</div>
                 <button onClick={this.handleClick}>click me to lazy load</button>
-                { this.state.A ? this.state.A : null }
+                { this.state.TwitterIcon ? this.state.TwitterIcon : null }
                 { this.state.ModuleA ? this.state.ModuleA : null }
             </div>
        );
