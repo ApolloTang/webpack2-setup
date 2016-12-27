@@ -1,7 +1,7 @@
 console.log('log from modules/module-a/index.js');
 
 import React, {Component} from  'react';
-import style from './index.css';
+import style from './index.less';
 
 
 class ModuleA extends Component {

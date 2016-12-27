@@ -1,7 +1,7 @@
 import React, {Component} from  'react';
 import { AppContainer as Hot } from 'react-hot-loader'
 
-import style from './root.css';
+import style from './root.less';
 import ModuleA from './modules/module-a';
 
 
