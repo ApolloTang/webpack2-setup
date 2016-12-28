@@ -71,7 +71,7 @@ module.exports = env => {
                 },
                 ifProd(
                     {
-                      test: /\.css$/,
+                      test: /\.less$/,
                       loader: ExtractTextPlugin.extract({
                           fallbackLoader: 'style-loader',
                           loader: 'css-loader?modules!less-loader',
