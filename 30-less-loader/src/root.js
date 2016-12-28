@@ -63,7 +63,7 @@ class Root extends Component {
     }
 
     render() {
-        const style = require('./root.css');
+        const style = require('./root.less');
         return (
             <div className={style.root}>
                 <div>This is Root</div>

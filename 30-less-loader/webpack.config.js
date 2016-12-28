@@ -74,14 +74,14 @@ module.exports = env => {
                       test: /\.css$/,
                       loader: ExtractTextPlugin.extract({
                           fallbackLoader: 'style-loader',
-                          loader: 'css-loader?modules!less',
+                          loader: 'css-loader?modules!less-loader',
                           // loader: 'css',
                       }),
                       include: absolutePathToSourceFolder
                     },
                     {
                       test: /\.less$/,
-                      loader: 'style-loader!css-loader?modules!less',
+                      loader: 'style-loader!css-loader?modules!less-loader',
                       include: absolutePathToSourceFolder
                     }
                 ),
