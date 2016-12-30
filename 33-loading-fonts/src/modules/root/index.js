@@ -22,6 +22,7 @@ class Root extends Component {
         if (module.hot) {
             // ModuleA
             console.info('✅  HMR Enabled for <ModuleA />.');
+
             this.setState( {ModuleA:(<Hot><ModuleA /></Hot>)});
 
             module.hot.accept('modules/module-a', (opts) => {
@@ -31,12 +32,15 @@ class Root extends Component {
                     ({ default: ModuleA_new }) => {
                         this.setState( {ModuleA: ( <Hot><ModuleA_new /></Hot>)})
                     },
-                    err => { console.info('❌  HMR error (<ModuleA />): ', err); }
+                    err => {
+                        console.info('❌  HMR error (<ModuleA />): ', err);
+                    }
                 );
             });
 
             // FontTest
             console.info('✅  HMR Enabled for <FontTest />.');
+
             this.setState( {FontTest:(<Hot><FontTest /></Hot>)});
 
             module.hot.accept('modules/font-test', (opts) => {
@@ -46,7 +50,9 @@ class Root extends Component {
                     ({ default: FontTest_new }) => {
                         this.setState( {FontTest: ( <Hot><FontTest_new /></Hot>)})
                     },
-                    err => { console.info('❌  HMR error (<FontTest />): ', err); }
+                    err => {
+                        console.info('❌  HMR error (<FontTest />): ', err);
+                    }
                 );
             });
         } else {
@@ -83,7 +89,6 @@ class Root extends Component {
     }
 
     render() {
-        console.log('yyxxx: ', style);
         return (
             <div className={style.root}>
                 <div>This is Root</div>

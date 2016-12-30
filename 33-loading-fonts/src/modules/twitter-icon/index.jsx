@@ -1,8 +1,7 @@
-console.log('log from module/twitter-icon/index.js');
+console.log('log: module/twitter-icon/index.js');
 
 import style from './index.less';
 import imageSrc from './twitter-01.png';
-console.log('imageSrc: ', imageSrc);
 
 import React, {Component} from  'react';
 class TwitterIcon extends Component {
@@ -12,12 +11,6 @@ class TwitterIcon extends Component {
                 <img src="imgs/twitter-01.png"></img>
             </div>
        );
-
-       //  return (
-       //      <div className={style['module-style']} >
-       //          <img src={imageSrc}></img>
-       //      </div>
-       // );
     }
 };
 

@@ -5,13 +5,14 @@ import {render} from 'react-dom';
 
 import { AppContainer as Hot } from 'react-hot-loader';
 
-import styleBootstrap from 'style-bootstrap';
+import fonts from 'common/fonts';
 
 import Root from 'modules/root';
 
 
 if (module.hot) {
     console.info('✅  HMR Enabled for <Root />.')
+
     render(
         <Hot><Root /></Hot>,
         document.getElementById('react-container')
@@ -19,6 +20,7 @@ if (module.hot) {
 
     module.hot.accept('modules/root', (opts) => {
         console.log('🔁 reloading <Root />...', opts);
+
         System.import('modules/root').then(
             ({ default: NewRoot }) => {
                 render( <Hot><NewRoot /></Hot>, document.getElementById('react-container'));

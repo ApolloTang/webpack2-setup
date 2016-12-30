@@ -1,15 +1,12 @@
-const fonts = [
-    'Roboto-Thin.ttf',
-    'fontawesome-webfont.ttf',
-];
 
-System.import('vendor/font-awesome').then(
+System.import('./index.less').then(
     ()=>{
+        const fonts = [
+            'Roboto-Thin.ttf'
+        ];
         fonts.forEach(font=>{
             const pathToFont = './fonts/'+font;
             require(`${pathToFont}`);
         })
     }
 );
-
-

@@ -38,7 +38,8 @@ module.exports = env => {
                 './vendor/oban'
             ],
             common: [
-                './common/styles/index.less'
+                './common/styles-init/index.less',
+                './common/fonts'
             ],
             main: removeEmpty([
                 // next three items are for HMR
