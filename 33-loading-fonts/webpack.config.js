@@ -25,8 +25,7 @@ module.exports = env => {
 
     let config = {
         devServer: {
-            // hot: ifNotProd(),
-            hot: false,
+            hot: ifNotProd(),
             host: '0.0.0.0',
             historyApiFallback: true,
         },

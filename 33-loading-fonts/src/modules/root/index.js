@@ -5,6 +5,7 @@ import { AppContainer as Hot } from 'react-hot-loader'
 
 import style from './index.less';
 import ModuleA from 'modules/module-a';
+import FontTest from 'modules/font-test';
 
 class Root extends Component {
     constructor () {
@@ -12,12 +13,14 @@ class Root extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.state = {
             TwitterIcon: null,
-            ModuleA: null
+            ModuleA: null,
+            FontTest: null
         };
     }
 
     componentDidMount() {
         if (module.hot) {
+            // ModuleA
             console.info('✅  HMR Enabled for <ModuleA />.');
             this.setState( {ModuleA:(<Hot><ModuleA /></Hot>)});
 
@@ -31,8 +34,24 @@ class Root extends Component {
                     err => { console.info('❌  HMR error (<ModuleA />): ', err); }
                 );
             });
+
+            // FontTest
+            console.info('✅  HMR Enabled for <FontTest />.');
+            this.setState( {FontTest:(<Hot><FontTest /></Hot>)});
+
+            module.hot.accept('modules/font-test', (opts) => {
+                console.log('🔁 reloading <FontTest />...', opts);
+
+                System.import('modules/font-test').then(
+                    ({ default: FontTest_new }) => {
+                        this.setState( {FontTest: ( <Hot><FontTest_new /></Hot>)})
+                    },
+                    err => { console.info('❌  HMR error (<FontTest />): ', err); }
+                );
+            });
         } else {
             this.setState( {ModuleA:(<ModuleA />)});
+            this.setState( {FontTest:(<FontTest />)});
         }
     }
 
@@ -71,11 +90,7 @@ class Root extends Component {
                 <button onClick={this.handleClick}>click me to lazy load</button>
                 { this.state.TwitterIcon ? this.state.TwitterIcon : null }
                 { this.state.ModuleA ? this.state.ModuleA : null }
-                <div>
-                    <p>Test font awesome
-                        <i className="fa fa-area-chart"></i>
-                    </p>
-                </div>
+                { this.state.FontTest ? this.state.FontTest : null }
             </div>
         );
     }
