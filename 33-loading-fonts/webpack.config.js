@@ -64,14 +64,13 @@ module.exports = env => {
         module: {
             loaders: removeEmpty([
                 {
-                    // test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
                     test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
-                    // loader: 'file-loader?publicPath=../&name=./imgs/[name].[ext]',  // <-- retain original file name
-                    loader: 'file-loader?name=./imgs/[name].[ext]'  // <-- retain original file name
+                    loader: 'file-loader?name=./imgs/[name].[ext]',  // <-- retain original file name
+                    exclude: pathResolve('src/common/fonts') // don't want to include svg in font
+
                 },
                 {
                     test: /\.(woff|woff2|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-                    // loader: 'file-loader?publicPath=../&name=fonts/[name].[hash].[ext]'  // <-- retain original file name
                     loader: 'file-loader?&name=fonts/[name].[ext]'  // <-- retain original file name
                 },
                 ifProd(
