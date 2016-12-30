@@ -1,9 +1,10 @@
+console.log('log:  /src/modules/root.js');
+
 import React, {Component} from  'react';
 import { AppContainer as Hot } from 'react-hot-loader'
 
-import style from './root.less';
-import ModuleA from './modules/module-a';
-
+import style from './index.less';
+import ModuleA from 'modules/module-a';
 
 class Root extends Component {
     constructor () {
@@ -20,10 +21,10 @@ class Root extends Component {
             console.info('✅  HMR Enabled for <ModuleA />.');
             this.setState( {ModuleA:(<Hot><ModuleA /></Hot>)});
 
-            module.hot.accept('./modules/module-a', (opts) => {
+            module.hot.accept('modules/module-a', (opts) => {
                 console.log('🔁 reloading Module A...', opts);
 
-                System.import('./modules/module-a').then(
+                System.import('modules/module-a').then(
                     ({ default: ModuleA_new }) => {
                         this.setState( {ModuleA: ( <Hot><ModuleA_new /></Hot>)})
                     },
@@ -40,14 +41,14 @@ class Root extends Component {
             if (module.hot) {
                 console.info('✅  HMR Enabled for <TwitterIcon />.');
 
-                System.import('./modules/twitter-icon').then(
+                System.import('modules/twitter-icon').then(
                     ({ default: TwitterIcon }) => { this.setState({TwitterIcon: (<Hot><TwitterIcon /></Hot>)}); }
                 );
 
-                module.hot.accept('./modules/twitter-icon', (opts) => {
+                module.hot.accept('modules/twitter-icon', (opts) => {
                     console.log('🔁 reloading <TwitterIcon />...', opts);
 
-                    System.import('./modules/twitter-icon').then(
+                    System.import('modules/twitter-icon').then(
                         ({ default: TwitterIcon_new }) => {
                             this.setState( {TwitterIcon: ( <Hot><TwitterIcon_new /></Hot>)})
                         },
@@ -55,7 +56,7 @@ class Root extends Component {
                     );
                 });
             } else {
-                System.import('./modules/twitter-icon').then(
+                System.import('modules/twitter-icon').then(
                     ({ default: TwitterIcon }) => { this.setState({TwitterIcon: (<TwitterIcon />)}); }
                 );
             }
@@ -63,10 +64,7 @@ class Root extends Component {
     }
 
     render() {
-        const style = require('./root.less');
-        require('./vendor/font-awesome.less');
         console.log('yyxxx: ', style);
-
         return (
             <div className={style.root}>
                 <div>This is Root</div>
@@ -79,7 +77,7 @@ class Root extends Component {
                     </p>
                 </div>
             </div>
-       );
+        );
     }
 };
 

@@ -1,5 +1,4 @@
 const pathResolve = require('path').resolve;
-// const webpackValidator = require('webpack-validator');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -12,13 +11,10 @@ const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const absolutePathToSourceFolder = pathResolve('src');
 const absolutePathToBuildFolder = pathResolve('dist');
 const absolutePathToNodeModules = pathResolve('./node_modules');
-const absolutePathToFonts = pathResolve('./src/common/fonts');
-const absolutePathToImages = pathResolve('./src/images');
 
 module.exports = env => {
     console.log('env: ', env);
     const {ifProd, ifNotProd} = getIfUtils(env);
-
 
     console.log( '----- path info -----');
     console.log('__dirname: ', __dirname);
@@ -29,7 +25,8 @@ module.exports = env => {
 
     let config = {
         devServer: {
-            hot: ifNotProd(),
+            // hot: ifNotProd(),
+            hot: false,
             host: '0.0.0.0',
             historyApiFallback: true,
         },
@@ -45,9 +42,9 @@ module.exports = env => {
                 './common/styles/index.less'
             ],
             main: removeEmpty([
+                // next three items are for HMR
                 ifNotProd('webpack-dev-server/client?http://0.0.0.0:8080'),
                 ifNotProd('webpack/hot/only-dev-server'),
-                // ifNotProd('webpack/hot/dev-server'),
                 ifNotProd('react-hot-loader/patch'),
                 './main',
             ])
@@ -58,13 +55,9 @@ module.exports = env => {
             filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js')
         },
         resolve: {
-            // http://moduscreate.com/es6-es2015-import-no-relative-path-webpack/
-            // http://stackoverflow.com/questions/27502608/resolving-require-paths-with-webpack
-            // https://gist.github.com/sokra/27b24881210b56bbaff7#resolving-options
-            // https://github.com/webpack/enhanced-resolve
             modules: [
                 absolutePathToSourceFolder,
-                absolutePathToNodeModules
+                absolutePathToNodeModules,
             ],
             extensions: ['.js', '.jsx', '.json', '.css', '.less'] // enables users to leave off the extension when importing
         },
@@ -73,26 +66,25 @@ module.exports = env => {
                 {
                     // test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
                     test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$/,
-                    loader: 'file-loader?name=./imgs/[name].[ext]',  // <-- retain original file name
-                    //https://github.com/coryhouse/react-slingshot/issues/128
+                    // loader: 'file-loader?publicPath=../&name=./imgs/[name].[ext]',  // <-- retain original file name
+                    loader: 'file-loader?name=./imgs/[name].[ext]'  // <-- retain original file name
                 },
                 {
-                    // test: /\.(woff|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-                    test: /\.ttf$/,
-                    loader: 'url-loader?name=./fonts/[name].[ext]&limit=50000',  // <-- retain original file name
+                    test: /\.(woff|woff2|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+                    // loader: 'file-loader?publicPath=../&name=fonts/[name].[hash].[ext]'  // <-- retain original file name
+                    loader: 'file-loader?&name=fonts/[name].[ext]'  // <-- retain original file name
                 },
                 ifProd(
                     {
-                      test: /\.less$/,
+                      test: /\.(less|css)$/,
                       loader: ExtractTextPlugin.extract({
                           fallbackLoader: 'style-loader',
-                          loader: 'style-loader!css-loader!less-loader',
-                          // loader: 'css',
+                          loader: 'css-loader!less-loader',
                       }),
                       include: absolutePathToSourceFolder
                     },
                     {
-                      test: /\.less$/,
+                      test: /\.(less|css)$/,
                       loader: 'style-loader!css-loader!less-loader',
                       include: absolutePathToSourceFolder
                     }
@@ -108,7 +100,7 @@ module.exports = env => {
             new ProgressBarPlugin(),
             new HtmlWebpackPlugin({
                 template: './index.template.html',
-                favicon: './images/favicon.ico'
+                favicon: './common/images/favicon.ico'
                 // inject: 'head',
             }),
             ifProd( new ExtractTextPlugin('styles.[name].[chunkhash].css')),
@@ -152,7 +144,6 @@ module.exports = env => {
     if (env && env.debug) {
         console.log('webpack.config: ', config)
     }
-    // return webpackValidator(config);
     return config;
 }
 
